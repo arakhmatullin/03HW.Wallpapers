@@ -19,23 +19,21 @@ public class Main {
         }
         int stripLength = roomHeight + stripLengthReserve;
         int stripsFromRoll;
+
         if (rapport != 0) {
             if (rapportOffset == 0) {
                 if (stripLength % rapport > 0) {
                     stripLength = (stripLength / rapport + 1) * rapport;
                 }
+            } else if (rapportOffset > stripLength % rapport) {
+                stripLength = (2 * stripLength / rapport + 1) * rapport / 2;
             } else {
-                if (rapportOffset > stripLength % rapport) {
-                    stripLength = (2 * stripLength / rapport + 1) * rapport / 2;
-                } else {
-                    int lengthWithOffset = stripLength + rapportOffset;
-                    if (stripLength % rapport > 0) {
-                        stripLength = (stripLength / rapport + 1) * rapport;
-                    }
-
-                    if (stripLength < lengthWithOffset) {
-                        stripLength += rapport / 2;
-                    }
+                int lengthWithOffset = stripLength + rapportOffset;
+                if (stripLength % rapport > 0) {
+                    stripLength = (stripLength / rapport + 1) * rapport;
+                }
+                if (stripLength < lengthWithOffset) {
+                    stripLength += rapport / 2;
                 }
             }
         }
